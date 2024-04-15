@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Trip</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        h2{
+            color: #333
+        }
+        
+        form {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+        input, select, button {
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .trip-suggestion {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #007BFF;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Plan Your Trip</h1>
+    <h2>Powered By OpenAI</h2>
+    <form method="POST" action="{{ url_for('plan_trip') }}">
+        <label for="budget">Budget ($):</label>
+        <input type="number" id="budget" name="budget" required><br>
+
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" required><br>
+
+        <label for="hotel">Hotel (Stars):</label>
+        <select id="hotel" name="hotel" required>
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+        </select><br>
+
+        <label for="time">Time (days):</label>
+        <input type="number" id="time" name="time" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+ 
+    <div id="loading" style="display: none;">
+        <div class="loader"></div> Loading...
+    </div>
+
+    {% if trip_suggestion %}
+    <div class="trip-suggestion">
+        <h2>Your Trip Suggestion:</h2>
+        <p>{{ trip_suggestion }}</p>
+    </div>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Back to Home</a>
+
+
+    <script>
+        document.querySelector('form').onsubmit = function() {
+            document.getElementById('loading').style.display = 'block';
+        };
+    </script>
+    <button onclick = "web()">https://www.airchina.com.cn/</button>
+    <script>
+        function web(){
+            window.location.href = "https://www.airchina.com.cn/";
+        }
+    </script>
+</body>
+</html>

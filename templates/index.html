@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 960px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #5a5a5a;
+            font-size: 100px;
+            margin: 0;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px; /* Make the button text larger */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center; /* Center the button horizontally */
+        }
+
+        img {
+            width: 800px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="{{ 'night-mode' if session.get('night_mode', False) else '' }}">
+    <header>
+        <h1>Trip Planner</h1>
+        <div class="navigation">
+            <button onclick="window.location.href='/login';">Login</button>
+            <button onclick="window.location.href='/settings';">Settings</button>
+        </div>
+    </header>
+    <div class="main-content">
+        <p>{{ message }}</p>
+        <div class="search-container">
+            <input type="text" id="userInput" placeholder="Input your destination e.g. Canada">
+            <button onclick="sendInput()">Search</button>
+        </div>
+        <div class="button-container">
+            <button onclick="window.location.href='/plan_trip';">Plan Your Trip</button>
+        </div>
+
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Food" width="400" height="400">
+    </div>
+
+    <script>
+        function sendInput() {
+            var input = document.getElementById('userInput').value;
+            window.location.href = '/?input=' + encodeURI(input);
+        }
+    </script>
+    <p>Produce by: Leo Mia Gillian-----HSSHACKS2024</p>
+</body>
+</html>

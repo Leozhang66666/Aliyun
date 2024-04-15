@@ -1,0 +1,11 @@
+version: 1
+authtoken: 2YyK4tFsmr5jEjbSgNnWxK310Z6_vWX83fp7FxrNpm6EKpsZ
+tunnels:
+  app1:
+    addr: 5000
+    proto: http
+    subdomain: app1-your-subdomain 
+  second-app:
+    addr: 5001
+    proto: http
+    subdomain: app2-your-subdomain 

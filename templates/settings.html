@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.night-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        input[type="password"], input[type="checkbox"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            width: auto;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .button-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body class="{% if user_night_mode %}night-mode{% endif %}">
+    <h1>Settings</h1>
+    <h2>Welcome, {{ username }}</h2>
+    <form method="POST">
+        <label for="current_password">Current Password:</label>
+        <input type="password" name="current_password" required><br>
+
+        <label for="new_password">New Password:</label>
+        <input type="password" name="new_password" required><br>
+
+
+        <button type="submit">Update Settings</button>
+    </form>
+    <a href="/logout" class="button-link">Logout</a>
+    <a href="/" class="button-link">Return to Home</a>
+    <script>
+    document.querySelector('[name="night_mode"]').addEventListener('change', function() {
+        document.body.classList.toggle('night-mode', this.checked);
+    });
+    </script>
+</body>
+</html>
